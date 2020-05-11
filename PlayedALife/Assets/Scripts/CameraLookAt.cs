@@ -8,6 +8,7 @@ public class CameraLookAt : MonoBehaviour
     public float x_speed;
     public float y_speed;
 
+
     float x;
     float y;
 

@@ -10,16 +10,28 @@ public class ChargeMenu : MonoBehaviour
     public GameObject _outterCircleGO, _tangentCircleGo;
     public Material matWithoutA;
 
+    TrailRenderer trail;
+    public bool reset;
+
     private void Start()
     {
         _outterCircleGO.GetComponent<Renderer>().material = matWithoutA;
+        _tangentCircleGo.GetComponent<Renderer>().material = matWithoutA;
+        trail = _tangentCircleGo.GetComponent<TrailRenderer>();
+        trail.enabled = false; 
     }
     void Update()
     {
-
-
         _tangentCircleGo.transform.position = GetRotatedTangent(_degree, _tangentCircleRadius) + _outterCircleGO.transform.position;
-        //_tangentCircleGo.transform.localScale = new Vector3(_tangentCircleRadius, _tangentCircleRadius, _tangentCircleRadius) * 2;
+        trail.enabled = true;
+
+        if (reset)
+        {
+            trail.enabled = false;
+            trail.Clear();
+            _degree = 0;
+            reset = false;
+        }
     }
 
     protected Vector3 GetRotatedTangent(float degree, float scale)
