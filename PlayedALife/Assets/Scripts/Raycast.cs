@@ -8,6 +8,14 @@ public class Raycast : MonoBehaviour
     [SerializeField] Material highlightMaterial;
     [SerializeField] Material defaultMaterial;
 
+
+    [SerializeField] Material StartMaterial;
+    [SerializeField] Material GalvezMaterial;
+    [SerializeField] Material MoreutMaterial;
+    [SerializeField] Material StartMaterialSelected;
+    [SerializeField] Material GalvezMaterialSelected;
+    [SerializeField] Material MoreutMaterialSelected;
+
     Transform _selection;
 
     [SerializeField] string selectableGreenTag;
@@ -20,6 +28,12 @@ public class Raycast : MonoBehaviour
     string color_red = "Red";
     string color_empty = "Empty";
 
+    [SerializeField] string selectableStartTag;
+    [SerializeField] string selectableGalvezTag;
+    [SerializeField] string selectableMoreuTag;
+
+    public GameObject StartScene;
+    public GameObject LevelScene;
 
     int layerMask = 1 << 8; //Number 8: Selectable
 
@@ -27,6 +41,7 @@ public class Raycast : MonoBehaviour
 
     void Start()
     {
+        LevelScene.SetActive(false);
     }
 
     void Update()
@@ -46,7 +61,7 @@ public class Raycast : MonoBehaviour
         {
 
             Transform selection = hit.transform;
-            if((selection.CompareTag(selectableGreenTag) || selection.CompareTag(selectableBlueTag) || selection.CompareTag(selectableRedTag))/* && time_pressed <= 0.5f*/)
+            if ((selection.CompareTag(selectableGreenTag) || selection.CompareTag(selectableBlueTag) || selection.CompareTag(selectableRedTag))/* && time_pressed <= 0.5f*/)
             {
                 var selectionRenderer = selection.GetComponent<Renderer>();
                 if (selectionRenderer != null)
@@ -61,8 +76,32 @@ public class Raycast : MonoBehaviour
                     color_selected = color_blue;
                 if (selection.CompareTag(selectableRedTag))
                     color_selected = color_red;
+            }
+            // Main Menu
+            else if ((selection.CompareTag(selectableStartTag) || selection.CompareTag(selectableGalvezTag) || selection.CompareTag(selectableMoreuTag)))
+            {
+                time_pressed += Time.deltaTime;
+                //var selectionRendererer = selection.GetComponent<Renderer>();
+                //if (selectionRendererer != null)
+                //{
+                //    selectionRendererer.material = highlightMaterial;
+                //}
+                //_selection = selection;
 
-                //time_pressed += Time.deltaTime;
+                if (time_pressed >= 2f)
+                {
+                    time_pressed = 0;
+                    if (selection.CompareTag(selectableStartTag))
+                    {
+                        LevelScene.SetActive(true);
+                        StartScene.SetActive(false);
+
+                    }
+                    if (selection.CompareTag(selectableGalvezTag))
+                        Application.OpenURL("https://www.linkedin.com/in/marc-g%C3%A1lvez-llorens-539938173/");
+                    if (selection.CompareTag(selectableMoreuTag))
+                        Application.OpenURL("https://www.linkedin.com/in/llu%C3%ADs-moreu-farran/");
+                }
             }
             else
             {
@@ -72,7 +111,7 @@ public class Raycast : MonoBehaviour
         else
         {
             color_selected = color_empty;
-            //time_pressed = 0;
+            time_pressed = 0;
         }
 
     }

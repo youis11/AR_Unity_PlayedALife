@@ -11,6 +11,9 @@ TagManager:
   - Green
   - Blue
   - Red
+  - Start
+  - Galvez
+  - Moreu
   layers:
   - Default
   - TransparentFX
