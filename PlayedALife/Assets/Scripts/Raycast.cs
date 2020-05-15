@@ -6,7 +6,7 @@ public class Raycast : MonoBehaviour
 {
     public Camera camera;
     [SerializeField] Material highlightMaterial_ReleaseBlue;
-    [SerializeField] Material highlightMaterial_ReleasePrange;
+    [SerializeField] Material highlightMaterial_ReleaseOrange;
     [SerializeField] Material highlightMaterial_ReleasePurple;
     [SerializeField] Material defaultMaterial_BaseBlue;
     [SerializeField] Material defaultMaterial_BaseOrange;
@@ -47,14 +47,29 @@ public class Raycast : MonoBehaviour
     public GameObject GalvezButton;
     public GameObject MoreuButton;
 
+    public GameObject BaseBlue;
+    public GameObject BaseOrange;
+    public GameObject BasePurple;
+
     Vector3 sizeUp_Menu;
     Vector3 sizeUp_Linkedin;    
     Vector3 sizeNormal_Menu;
     Vector3 sizeNormal_Linkedin;
 
+    Vector3 sizeUp_BaseBlue;
+    Vector3 sizeUp_BaseOrange;
+    Vector3 sizeUp_BasePurple;
+    Vector3 sizeNormal_BaseBlue;
+    Vector3 sizeNormal_BaseOrange;
+    Vector3 sizeNormal_BasePurple;
+
     ChargeMenu trailMenu;
     ChargeMenu trailGalvez;
     ChargeMenu trailMoreu;
+
+    bool was_blue = false;
+    bool was_orange = false;
+    bool was_purple = false;
 
 
     int layerMask = 1 << 8; //Number 8: Selectable
@@ -75,6 +90,10 @@ public class Raycast : MonoBehaviour
         sizeNormal_Linkedin = GalvezButton.transform.localScale;
         sizeUp_Menu = sizeNormal_Menu * 1.1f;
         sizeUp_Linkedin = sizeNormal_Linkedin * 1.1f;
+
+
+        sizeNormal_BaseBlue = BaseBlue.transform.localScale;
+        sizeUp_BaseBlue = sizeNormal_BaseBlue * 1.1f;
     }
 
     void Update()
@@ -83,8 +102,23 @@ public class Raycast : MonoBehaviour
         if(_selection != null)
         {
             Renderer selectionRenderer = _selection.GetComponent<Renderer>();
-            selectionRenderer.material = defaultMaterial_BaseBlue;
             _selection = null;
+
+            if(was_blue)
+            {
+                selectionRenderer.material = defaultMaterial_BaseBlue;
+                was_blue = false;
+            }
+            if(was_orange)
+            {
+                selectionRenderer.material = defaultMaterial_BaseOrange;
+                was_orange = false;
+            }
+            if(was_purple)
+            {
+                selectionRenderer.material = defaultMaterial_BasePurple;
+                was_purple = false;
+            }
         }
 
         Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width*0.5f, Screen.height*0.5f, 0));
@@ -97,18 +131,42 @@ public class Raycast : MonoBehaviour
             if ((selection.CompareTag(selectableGreenTag) || selection.CompareTag(selectableBlueTag) || selection.CompareTag(selectableRedTag))/* && time_pressed <= 0.5f*/)
             {
                 var selectionRenderer = selection.GetComponent<Renderer>();
-                if (selectionRenderer != null)
-                {
-                    selectionRenderer.material = highlightMaterial_ReleaseBlue;
-                }
+               
                 _selection = selection;
 
                 if (selection.CompareTag(selectableGreenTag))
+                {
                     color_selected = color_green;
+                    if (selectionRenderer != null)
+                    {
+                        selectionRenderer.material = highlightMaterial_ReleaseOrange;
+                        was_orange = true;
+                    }
+                    
+
+                }
                 if (selection.CompareTag(selectableBlueTag))
+                {
                     color_selected = color_blue;
+                    if (selectionRenderer != null)
+                    {
+                        selectionRenderer.material = highlightMaterial_ReleaseBlue;
+                        was_blue = true;
+                    }
+
+                }
                 if (selection.CompareTag(selectableRedTag))
+                {
                     color_selected = color_red;
+
+                    if (selectionRenderer != null)
+                    {
+                        selectionRenderer.material = highlightMaterial_ReleasePurple;
+                        was_purple = true;
+                    }
+                   
+                    
+                }
             }
             // Main Menu
             else if ((selection.CompareTag(selectableStartTag) || selection.CompareTag(selectableGalvezTag) || selection.CompareTag(selectableMoreuTag)))
@@ -188,6 +246,12 @@ public class Raycast : MonoBehaviour
         MenuButton.transform.localScale = sizeNormal_Menu;
         GalvezButton.transform.localScale = sizeNormal_Linkedin;
         MoreuButton.transform.localScale = sizeNormal_Linkedin;
+
+        BaseBlue.transform.localScale = sizeNormal_BaseBlue;
+        BaseOrange.transform.localScale = sizeNormal_BaseOrange;
+        BasePurple.transform.localScale = sizeNormal_BasePurple;
+
+
     }
 
 }
