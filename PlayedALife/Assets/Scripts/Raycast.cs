@@ -5,8 +5,12 @@ using UnityEngine;
 public class Raycast : MonoBehaviour
 {
     public Camera camera;
-    [SerializeField] Material highlightMaterial;
-    [SerializeField] Material defaultMaterial;
+    [SerializeField] Material highlightMaterial_ReleaseBlue;
+    [SerializeField] Material highlightMaterial_ReleasePrange;
+    [SerializeField] Material highlightMaterial_ReleasePurple;
+    [SerializeField] Material defaultMaterial_BaseBlue;
+    [SerializeField] Material defaultMaterial_BaseOrange;
+    [SerializeField] Material defaultMaterial_BasePurple;
 
 
     [SerializeField] Material StartMaterial;
@@ -79,7 +83,7 @@ public class Raycast : MonoBehaviour
         if(_selection != null)
         {
             Renderer selectionRenderer = _selection.GetComponent<Renderer>();
-            selectionRenderer.material = defaultMaterial;
+            selectionRenderer.material = defaultMaterial_BaseBlue;
             _selection = null;
         }
 
@@ -95,7 +99,7 @@ public class Raycast : MonoBehaviour
                 var selectionRenderer = selection.GetComponent<Renderer>();
                 if (selectionRenderer != null)
                 {
-                    selectionRenderer.material = highlightMaterial;
+                    selectionRenderer.material = highlightMaterial_ReleaseBlue;
                 }
                 _selection = selection;
 
