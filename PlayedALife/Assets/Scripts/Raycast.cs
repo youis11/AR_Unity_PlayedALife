@@ -51,6 +51,8 @@ public class Raycast : MonoBehaviour
     public GameObject BaseOrange;
     public GameObject BasePurple;
 
+    public GameObject InsertDisk;
+
     Vector3 sizeUp_Menu;
     Vector3 sizeUp_Linkedin;    
     Vector3 sizeNormal_Menu;
@@ -181,6 +183,7 @@ public class Raycast : MonoBehaviour
                         time_start_pressed = 0;
                         LevelScene.SetActive(true);
                         StartScene.SetActive(false);
+                        InsertDisk.SetActive(false);
                     }
                     // Size up
                     MenuButton.transform.localScale = sizeUp_Menu;
