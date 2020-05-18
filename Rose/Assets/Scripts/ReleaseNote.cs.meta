@@ -3,7 +3,20 @@ guid: 77b1d5472b8edc141852a4ba7cf723b7
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - selectionManager: {instanceID: 0}
+  - highlightMaterial_ReleaseBlue: {fileID: 2100000, guid: b6e78b9798a47be4b989b0878411aabd,
+      type: 2}
+  - highlightMaterial_ReleaseOrange: {fileID: 2100000, guid: 9225f5458b2ac5a489bf105775b820ae,
+      type: 2}
+  - highlightMaterial_ReleasePurple: {fileID: 2100000, guid: a06fb8f52d22a3b4091f695f6fc5b175,
+      type: 2}
+  - defaultMaterial_BaseBlue: {fileID: 2100000, guid: 0a9d19c815b92ca48a61c27808471c45,
+      type: 2}
+  - defaultMaterial_BaseOrange: {fileID: 2100000, guid: 298bcafa80f906a409387ce29e46654e,
+      type: 2}
+  - defaultMaterial_BasePurple: {fileID: 2100000, guid: 844e6e322e5d0b1498de666d5b9d0a90,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
