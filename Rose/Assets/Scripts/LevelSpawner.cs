@@ -13,7 +13,7 @@ public class LevelSpawner : MonoBehaviour
         NONE
     }
 
-    Difficulty difficultyType = Difficulty.SUPEREZ; 
+    Difficulty difficultyType = Difficulty.EASY; 
 
     float bpm = 0.491f;
     float timer =0;
