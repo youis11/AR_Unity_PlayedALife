@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class ReleaseNote : MonoBehaviour
 {
-    [SerializeField] string notetag;
-    Raycast rayScript;
+    [SerializeField] string player;
+    [SerializeField] string noteTag;
     public GameObject selectionManager;
     // Start is called before the first frame update
     void Start()
     {
-        rayScript = selectionManager.GetComponent<Raycast>();
     }
 
     // Update is called once per frame
@@ -21,10 +20,13 @@ public class ReleaseNote : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == notetag && rayScript.ReturnSelected() == notetag)
+        if (other.tag == player && other.tag == noteTag)
         {
-            Debug.Log("Point+1");
-            other.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.75f);
+            // TODO: White particles going up with trail and score++
+        }
+        if (other.tag == player)
+        {
+            // TODO change material 
         }
         
     }
