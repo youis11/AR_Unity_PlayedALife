@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Spawner
+  - Blue_Releaser
+  - Purple_Releaser
+  - Orange_Releaser
   layers:
   - Default
   - TransparentFX
