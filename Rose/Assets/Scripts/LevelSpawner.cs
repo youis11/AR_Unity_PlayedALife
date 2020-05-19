@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelSpawner : MonoBehaviour
 {
-    enum Difficulty
+    public enum Difficulty
     {
         HARD,
         MEDIUM,
@@ -13,7 +13,7 @@ public class LevelSpawner : MonoBehaviour
         NONE
     }
 
-    Difficulty difficultyType = Difficulty.EASY; 
+    Difficulty difficultyType = Difficulty.NONE; 
 
     float bpm = 0.491f;
     float timer =0;
@@ -27,14 +27,27 @@ public class LevelSpawner : MonoBehaviour
     int last_random_note_number = 0;
     public float distance_between_notes;
 
+    float current_time_line;
+    float max_time_line;
+    int index_stamp = 0;
+
+    public AudioSource Rose;
+
+    public List<Difficulty> TimeStampsType = new List<Difficulty>();
+    public List<float> TimeStamps = new List<float>();
+
+    bool play = false;
+    bool is_playing = false;
+
     void Start()
-    {
-        
+    {     
+        // Pick the last Stamp
+        max_time_line = TimeStamps[TimeStamps.Count - 1];
     }
 
     void Update()
     {
-
+        // Debug
         if (Input.GetKeyDown(KeyCode.Alpha1))
             difficultyType = Difficulty.SUPEREZ;
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -45,6 +58,30 @@ public class LevelSpawner : MonoBehaviour
             difficultyType = Difficulty.HARD;
         if (Input.GetKeyDown(KeyCode.Alpha5))
             difficultyType = Difficulty.NONE;
+        if (Input.GetKeyDown(KeyCode.Space))
+            play = !play;
+
+        // Difficulty Setters
+
+        if (play)
+            PlaySong();
+        else
+        {
+            is_playing = false;
+            Rose.Pause();
+        }
+
+        
+
+    }
+
+    void PlaySong()
+    {
+        if(!is_playing)
+        {
+            Rose.Play();
+            is_playing = true;
+        }
 
         switch (difficultyType)
         {
@@ -52,7 +89,7 @@ public class LevelSpawner : MonoBehaviour
                 bpm_instantiate = bpm;
                 break;
             case Difficulty.MEDIUM: // BPM *2
-                bpm_instantiate = bpm *2;
+                bpm_instantiate = bpm * 2;
                 break;
             case Difficulty.EASY: // BPM *3
                 bpm_instantiate = bpm * 3;
@@ -68,8 +105,33 @@ public class LevelSpawner : MonoBehaviour
                 break;
         }
 
+        current_time_line += Time.deltaTime;
+
+        if (current_time_line <= max_time_line)
+        {
+            if (current_time_line <= TimeStamps[index_stamp])
+            {
+                difficultyType = TimeStampsType[index_stamp - 1];
+            }
+            else
+            {
+                index_stamp++;
+                Debug.Log(TimeStampsType[index_stamp - 1]);
+            }
+        }
+        else
+        {
+            // TODO: End song, show score + fireworks and go main menu, also reset timer
+            current_time_line = 0;
+            index_stamp = 0;
+        }
+
+
+
+
+        // Instantiate
         timer += Time.deltaTime;
-        if(timer >= bpm_instantiate)
+        if (timer >= bpm_instantiate)
         {
             while (random_note_number == last_random_note_number)
                 random_note_number = Random.Range(1, 4);
@@ -88,4 +150,5 @@ public class LevelSpawner : MonoBehaviour
             timer = 0;
         }
     }
+
 }
