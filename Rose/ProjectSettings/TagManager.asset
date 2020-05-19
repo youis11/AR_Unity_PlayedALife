@@ -11,6 +11,7 @@ TagManager:
   - BlueNote
   - PurpleNote
   - OrangeNote
+  - Dead
   layers:
   - Default
   - TransparentFX
