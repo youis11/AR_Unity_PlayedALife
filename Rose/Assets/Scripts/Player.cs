@@ -9,6 +9,12 @@ public class Player : MonoBehaviour
     public GameObject PurpleBase;
     public GameObject OrangeBase;
 
+    public GameObject BlueNote;
+    public GameObject PurpleNote;
+    public GameObject OrangeNote;
+
+
+
     Vector3 nextTargetPosition;
     string actualTarget;
 
@@ -63,5 +69,21 @@ public class Player : MonoBehaviour
         }
 
         transform.position = nextTargetPosition;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == BlueNote.tag)
+        {
+            Destroy(other.gameObject);
+        }
+        if (other.tag == PurpleNote.tag)
+        {
+            Destroy(other.gameObject);
+        }
+        if (other.tag == OrangeNote.tag)
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

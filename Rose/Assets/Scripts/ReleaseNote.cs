@@ -32,7 +32,9 @@ public class ReleaseNote : MonoBehaviour
     {
         if (other.tag == playerTag && other.tag == noteTag)
         {
-            // TODO: White particles going up with trail and score++
+            // TODO: White particles going up with trail and score++ and destroy note
+
+
         }
         if (other.tag == playerTag)
         {

@@ -8,6 +8,9 @@ TagManager:
   - Blue_Releaser
   - Purple_Releaser
   - Orange_Releaser
+  - BlueNote
+  - PurpleNote
+  - OrangeNote
   layers:
   - Default
   - TransparentFX
