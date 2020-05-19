@@ -38,9 +38,13 @@ public class LevelSpawner : MonoBehaviour
 
     bool play = false;
     bool is_playing = false;
+    Player player;
+
+    float timer_start;
 
     void Start()
-    {     
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         // Pick the last Stamp
         max_time_line = TimeStamps[TimeStamps.Count - 1];
     }
@@ -68,6 +72,7 @@ public class LevelSpawner : MonoBehaviour
         else
         {
             is_playing = false;
+            timer_start = 0;
             Rose.Pause();
         }
 
@@ -77,9 +82,11 @@ public class LevelSpawner : MonoBehaviour
 
     void PlaySong()
     {
-        if(!is_playing)
+        timer_start += Time.deltaTime;
+        if(!is_playing && timer_start >= 3)
         {
             Rose.Play();
+            player.OnStartSong();
             is_playing = true;
         }
 
@@ -122,7 +129,7 @@ public class LevelSpawner : MonoBehaviour
         else
         {
             // TODO: End song, show score + fireworks and go main menu, also reset timer
-            current_time_line = 0;
+            //current_time_line = 0;
             index_stamp = 0;
         }
 

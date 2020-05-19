@@ -50,6 +50,13 @@ public class Player : MonoBehaviour
         
     }
 
+    public void OnStartSong()
+    {
+        actualTarget = PurpleBase.transform.tag;
+        nextTargetPosition = PurpleBase.transform.position;
+        transform.position = nextTargetPosition;
+    }
+
     public void OnClickRight()
     {
         if (actualTarget == BlueBase.transform.tag)
