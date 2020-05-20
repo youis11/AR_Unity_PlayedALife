@@ -64,12 +64,10 @@ public class LevelSpawner : MonoBehaviour
             difficultyType = Difficulty.HARD;
         if (Input.GetKeyDown(KeyCode.Alpha5))
             difficultyType = Difficulty.NONE;
-        if (ui.targetfound && ui.levelfound)
-            play = !play;
-
+       
         // Difficulty Setters
 
-        if (play)
+        if (ui.targetfound && ui.levelfound)
             PlaySong();
         else
         {
