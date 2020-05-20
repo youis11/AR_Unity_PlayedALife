@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         actualTarget = PurpleBase.transform.tag;
-        audio_source = GetComponentInChildren<AudioSource>();
     }
 
     void Update()
@@ -42,17 +41,20 @@ public class Player : MonoBehaviour
         }
         else if (actualTarget == PurpleBase.transform.tag)
         {
+            audio_source.clip = move_wav;
+            audio_source.Play();
             nextTargetPosition = BlueBase.transform.position;
             actualTarget = BlueBase.transform.tag;
         }
         else if (actualTarget == OrangeBase.transform.tag)
         {
+            audio_source.clip = move_wav;
+            audio_source.Play();
             nextTargetPosition = PurpleBase.transform.position;
             actualTarget = PurpleBase.transform.tag;
         }
 
-        audio_source.clip = move_wav;
-        audio_source.Play();
+        
         transform.position = nextTargetPosition;
         
     }
@@ -68,11 +70,15 @@ public class Player : MonoBehaviour
     {
         if (actualTarget == BlueBase.transform.tag)
         {
+            audio_source.clip = move_wav;
+            audio_source.Play();
             nextTargetPosition = PurpleBase.transform.position;
             actualTarget = PurpleBase.transform.tag;
         }
         else if (actualTarget == PurpleBase.transform.tag)
         {
+            audio_source.clip = move_wav;
+            audio_source.Play();
             nextTargetPosition = OrangeBase.transform.position;
             actualTarget = OrangeBase.transform.tag;
         }
@@ -82,8 +88,7 @@ public class Player : MonoBehaviour
             actualTarget = OrangeBase.transform.tag;
         }
 
-        audio_source.clip = move_wav;
-        audio_source.Play();
+      
         transform.position = nextTargetPosition;
     }
 
@@ -91,21 +96,21 @@ public class Player : MonoBehaviour
     {
         if(other.tag == BlueNote.tag)
         {
-            UI.score_value += 100;
+            UI.score_value += 10;
             audio_source.clip = release_wav;
             audio_source.Play();
             Destroy(other.gameObject);
         }
         if (other.tag == PurpleNote.tag)
         {
-            UI.score_value += 100;
+            UI.score_value += 10;
             audio_source.clip = release_wav;
             audio_source.Play();
             Destroy(other.gameObject);
         }
         if (other.tag == OrangeNote.tag)
         {
-            UI.score_value += 100;
+            UI.score_value += 10;
             audio_source.clip = release_wav;
             audio_source.Play();
             Destroy(other.gameObject);

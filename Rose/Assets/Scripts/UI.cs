@@ -33,6 +33,7 @@ public class UI : MonoBehaviour
 
     AudioSource audio_source;
     public AudioClip start_wav;
+    public bool game_over = false;
 
     void Start()
     {
@@ -63,7 +64,10 @@ public class UI : MonoBehaviour
         }
 
         Score.text = "Score: " + score_value;
-
+        if(game_over)
+        {
+            uiManager = TypeUI.WIN;
+        }
     }
 
     public void ResetUI()
@@ -145,5 +149,11 @@ public class UI : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ReturnMainMenu()
+    {
+        uiManager = TypeUI.MAIN;
+        game_over = false;
     }
 }

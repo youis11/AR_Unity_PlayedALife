@@ -23,6 +23,8 @@ public class LevelSpawner : MonoBehaviour
     public GameObject blueNote;
     public GameObject orangeNote;
 
+    public GameObject FireWorks;
+
     int random_note_number = 0;
     int last_random_note_number = 0;
     public float distance_between_notes;
@@ -67,7 +69,7 @@ public class LevelSpawner : MonoBehaviour
        
         // Difficulty Setters
 
-        if (ui.targetfound && ui.levelfound)
+        if (ui.targetfound && ui.levelfound && !ui.game_over)
             PlaySong();
         else
         {
@@ -86,6 +88,7 @@ public class LevelSpawner : MonoBehaviour
         if(!is_playing && timer_start >= 3)
         {
             Rose.Play();
+            FireWorks.SetActive(false);
             player.OnStartSong();
             is_playing = true;
         }
@@ -128,8 +131,10 @@ public class LevelSpawner : MonoBehaviour
         }
         else
         {
+            ui.game_over = true;
+            FireWorks.SetActive(true);
             // TODO: End song, show score + fireworks and go main menu, also reset timer
-            //current_time_line = 0;
+            current_time_line = 0;
             index_stamp = 0;
         }
 
