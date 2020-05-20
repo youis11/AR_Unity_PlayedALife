@@ -39,12 +39,14 @@ public class LevelSpawner : MonoBehaviour
     bool play = false;
     bool is_playing = false;
     Player player;
+    UI ui;
 
     float timer_start;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        ui = GameObject.FindGameObjectWithTag("Ui").GetComponent<UI>();
         // Pick the last Stamp
         max_time_line = TimeStamps[TimeStamps.Count - 1];
     }
@@ -62,7 +64,7 @@ public class LevelSpawner : MonoBehaviour
             difficultyType = Difficulty.HARD;
         if (Input.GetKeyDown(KeyCode.Alpha5))
             difficultyType = Difficulty.NONE;
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (ui.targetfound && ui.levelfound)
             play = !play;
 
         // Difficulty Setters

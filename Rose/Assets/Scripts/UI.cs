@@ -7,8 +7,6 @@ public class UI : MonoBehaviour
     enum TypeUI
     {
         MAIN,
-        SEARCHPLAYER,
-        LEVELFOUND,
         INGAME,
         WIN
     }
@@ -18,19 +16,24 @@ public class UI : MonoBehaviour
     public GameObject MainMenu;
     public GameObject InGame;
     public GameObject Win;
-    public GameObject SearchPlayer;
-    public GameObject SearchLevel;
 
-    bool targetfound = false;
-    bool levelfound = false;
+    public bool targetfound = false;
+    public bool levelfound = false;
 
-    // Start is called before the first frame update
+    float timer_character = 0;
+    float timer_level = 0;
+    ChargeMenu trailCharacter;
+    ChargeMenu trailLevel;
+    public GameObject trailCharacterGO;
+    public GameObject trailLevelGO;
+
+
     void Start()
     {
-        
+        trailCharacter = trailCharacterGO.GetComponent<ChargeMenu>();
+        trailLevel = trailLevelGO.GetComponent<ChargeMenu>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         switch (uiManager)
@@ -47,14 +50,6 @@ public class UI : MonoBehaviour
                 ResetUI();
                 Win.SetActive(true);
                 break;
-            case TypeUI.SEARCHPLAYER:
-                ResetUI();
-                SearchPlayer.SetActive(true);
-                break;
-            case TypeUI.LEVELFOUND:
-                ResetUI();
-                SearchLevel.SetActive(true);
-                break;
             default:
                 uiManager = TypeUI.MAIN;
                 break;
@@ -64,26 +59,66 @@ public class UI : MonoBehaviour
     public void ResetUI()
     {
         MainMenu.SetActive(false);
-        SearchPlayer.SetActive(false);
-        SearchLevel.SetActive(false);
+      
         InGame.SetActive(false);
         Win.SetActive(false);
     }
 
     public void LetsGo()
     {
-        uiManager = TypeUI.SEARCHPLAYER;
+        uiManager = TypeUI.INGAME;
     }
 
     public void PlayerFound()
     {
-        //TODO wait 3s and  then active bool and go to select song menu
+        targetfound = true;
     }
+    //public void PlayerFound()
+    //{
+    //    //TODO wait 2s and then active bool and go to select song menu
+    //    // Particle effect
+    //    timer_character += Time.deltaTime;
+    //    trailCharacter._degree += 360 / 2 * Time.deltaTime;
+    //    if (timer_character >= 2f)
+    //    {
+    //        targetfound = true;
+    //        timer_character = 0;
+    //        trailCharacterGO.SetActive(false);
+    //        uiManager = TypeUI.LEVELFOUND;
 
+    //    }
+
+    //}
+  
+    //public void PlayerLost()
+    //{
+    //    timer_character = 0;
+    //    trailCharacter.reset = true;
+    //}
     public void SelectSong()
     {
-        //TODO wait 3s and  then active bool and play song
+        levelfound = true;
     }
+
+    //public void SelectSong()
+    //{
+    //    //TODO wait 3s and  then active bool and play song
+    //    timer_level += Time.deltaTime;
+    //    trailLevel._degree += 360 / 2 * Time.deltaTime;
+    //    if (timer_level >= 2f)
+    //    {
+    //        levelfound = true;
+    //        timer_level = 0;
+    //        trailLevelGO.SetActive(false);
+    //        uiManager = TypeUI.INGAME;
+
+    //    }
+    //}
+    //public void SelectSongLost()
+    //{
+    //    timer_level = 0;
+    //    trailLevel.reset = true;
+    //}
 
     public void MarcGalvez()
     {

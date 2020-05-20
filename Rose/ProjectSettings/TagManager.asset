@@ -12,6 +12,7 @@ TagManager:
   - PurpleNote
   - OrangeNote
   - Dead
+  - Ui
   layers:
   - Default
   - TransparentFX
