@@ -18,15 +18,22 @@ public class NoteMovement : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.forward * -speed * Time.deltaTime);
+        transform.rotation = Spawner.transform.rotation;
+        //if (transform.tag == "BlueNote")
+        //{
+        //    transform.position = new Vector3(Spawner.transform.position.x - distance_between, Spawner.transform.position.y, transform.position.z/* * -speed * Time.deltaTime*/);
+            
+        //}
 
-        if(transform.tag == "Blue")
-            transform.position = new Vector3(Spawner.transform.position.x - distance_between, Spawner.transform.position.y, Spawner.transform.position.z);
+        //if (transform.tag == "PurpleNote")
+        //{
+        //    transform.position = new Vector3(Spawner.transform.position.x, Spawner.transform.position.y, transform.position.z/* * -speed * Time.deltaTime*/);
+        //}
 
-        if (transform.tag == "Purple")
-            transform.position = new Vector3(Spawner.transform.position.x, Spawner.transform.position.y, Spawner.transform.position.z);
-
-        if (transform.tag == "Orange")
-            transform.position = new Vector3(Spawner.transform.position.x + distance_between, Spawner.transform.position.y, Spawner.transform.position.z);
+        //if (transform.tag == "OrangeNote")
+        //{
+        //    transform.position = new Vector3(Spawner.transform.position.x + distance_between, Spawner.transform.position.y, transform.position.z /** -speed * Time.deltaTime*/);
+        //}
 
 
         //if (Input.GetKeyDown(KeyCode.Space))

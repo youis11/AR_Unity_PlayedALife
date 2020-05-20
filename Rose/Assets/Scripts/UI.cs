@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
@@ -22,16 +23,22 @@ public class UI : MonoBehaviour
 
     float timer_character = 0;
     float timer_level = 0;
-    ChargeMenu trailCharacter;
-    ChargeMenu trailLevel;
+    //ChargeMenu trailCharacter;
+    //ChargeMenu trailLevel;
     public GameObject trailCharacterGO;
     public GameObject trailLevelGO;
 
+    public Text Score;
+    static public int score_value;
+
+    AudioSource audio_source;
+    public AudioClip start_wav;
 
     void Start()
     {
-        trailCharacter = trailCharacterGO.GetComponent<ChargeMenu>();
-        trailLevel = trailLevelGO.GetComponent<ChargeMenu>();
+        //trailCharacter = trailCharacterGO.GetComponent<ChargeMenu>();
+        //trailLevel = trailLevelGO.GetComponent<ChargeMenu>();
+        audio_source = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -54,6 +61,9 @@ public class UI : MonoBehaviour
                 uiManager = TypeUI.MAIN;
                 break;
         }
+
+        Score.text = "Score: " + score_value;
+
     }
 
     public void ResetUI()
@@ -67,6 +77,8 @@ public class UI : MonoBehaviour
     public void LetsGo()
     {
         uiManager = TypeUI.INGAME;
+        audio_source.clip = start_wav;
+        audio_source.Play();
     }
 
     public void PlayerFound()
