@@ -29,11 +29,17 @@ public class UI : MonoBehaviour
     public GameObject trailLevelGO;
 
     public Text Score;
+    public Text FinalScore;
+    public Text Grade;
+    //public Text PreviewGrade;
     static public int score_value;
 
     AudioSource audio_source;
     public AudioClip start_wav;
     public bool game_over = false;
+
+    public static int streak_combo;
+    public Text Combo;
 
     void Start()
     {
@@ -64,9 +70,18 @@ public class UI : MonoBehaviour
         }
 
         Score.text = "Score: " + score_value;
-        if(game_over)
+        if(streak_combo != 0 && streak_combo != 1)
+        {
+            Combo.text = "Combo x" + streak_combo;
+        }
+        else
+            Combo.text = "";
+
+        if (game_over)
         {
             uiManager = TypeUI.WIN;
+            Grade.text = CalculeGrade(score_value);
+            FinalScore.text = "FInal Score: " + score_value;
         }
     }
 
@@ -155,5 +170,44 @@ public class UI : MonoBehaviour
     {
         uiManager = TypeUI.MAIN;
         game_over = false;
+    }
+
+    public string CalculeGrade(int score)
+    {
+        if (score >= 0 && score < 550 )
+        {
+            return "F";
+        }
+        else if(score >= 550 && score < 900)
+        {
+            return "D";
+        }
+        else if (score >= 900 && score < 1400)
+        {
+            return "C";
+        }
+        else if (score >= 1400 && score < 1720)
+        {
+            return "B";
+        }
+        else if (score >= 1720 && score < 2000)
+        {
+            return "A";
+        }
+        else if (score >= 2000)
+        {
+            return "S";
+        }
+        else
+        {
+            return "A";
+        }
+
+    }
+
+    public void ComboWombo()
+    {
+
+
     }
 }

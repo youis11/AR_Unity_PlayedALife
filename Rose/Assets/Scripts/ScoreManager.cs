@@ -8,9 +8,13 @@ public class ScoreManager : MonoBehaviour
     public GameObject PurpleNote;
     public GameObject OrangeNote;
 
+    public AudioSource audio_source;
+    public AudioClip lose_streak;
+
     void Start()
     {
-        
+        audio_source.clip = lose_streak;
+
     }
 
     void Update()
@@ -23,15 +27,21 @@ public class ScoreManager : MonoBehaviour
         if (other.tag == BlueNote.tag)
         {
             Destroy(other.gameObject);
+            UI.streak_combo = 0;
+            audio_source.Play();
 
         }
         if (other.tag == PurpleNote.tag)
         {
             Destroy(other.gameObject);
+            UI.streak_combo = 0;
+            audio_source.Play();
         }
         if (other.tag == OrangeNote.tag)
         {
             Destroy(other.gameObject);
+            UI.streak_combo = 0;
+            audio_source.Play();
         }
     }
 }

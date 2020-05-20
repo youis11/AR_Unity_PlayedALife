@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public AudioClip release_wav;
     public AudioClip move_wav;
 
+    
+
 
 
     Vector3 nextTargetPosition;
@@ -97,6 +99,9 @@ public class Player : MonoBehaviour
         if(other.tag == BlueNote.tag)
         {
             UI.score_value += 10;
+            UI.streak_combo ++;
+            UI.score_value += UI.streak_combo;
+
             audio_source.clip = release_wav;
             audio_source.Play();
             Destroy(other.gameObject);
@@ -104,6 +109,9 @@ public class Player : MonoBehaviour
         if (other.tag == PurpleNote.tag)
         {
             UI.score_value += 10;
+            UI.streak_combo++;
+            UI.score_value += UI.streak_combo;
+
             audio_source.clip = release_wav;
             audio_source.Play();
             Destroy(other.gameObject);
@@ -111,9 +119,14 @@ public class Player : MonoBehaviour
         if (other.tag == OrangeNote.tag)
         {
             UI.score_value += 10;
+            UI.streak_combo++;
+            UI.score_value += UI.streak_combo;
+
             audio_source.clip = release_wav;
             audio_source.Play();
             Destroy(other.gameObject);
         }
     }
+
+   
 }
